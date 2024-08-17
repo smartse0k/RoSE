@@ -1,24 +1,19 @@
 ﻿namespace Util
 {
+    public enum LogLevel
+    {
+        ERROR,
+        WARN,
+        INFO
+    }
+
     public class Logger
     {
-        public enum LogLevel
-        {
-            ERROR,
-            WARN,
-            INFO
-        }
+        public static LogLevel LogLevel { get; set; } = LogLevel.INFO;
 
-        private LogLevel _logLevel;
-
-        public Logger(LogLevel logLevel)
+        static void Print(LogLevel logLevel, String message)
         {
-            _logLevel = logLevel;
-        }
-
-        void Print(LogLevel logLevel, String message)
-        {
-            if (logLevel > _logLevel)
+            if (logLevel > LogLevel)
             {
                 return;
             }
@@ -32,17 +27,17 @@
             textWriter.WriteLine($"[{logLevel}] [{DateTime.Now}] {message}");
         }
 
-        public void Error(String message)
+        public static void Error(String message)
         {
             Print(LogLevel.ERROR, message);
         }
 
-        public void Warn(String message)
+        public static void Warn(String message)
         {
             Print(LogLevel.WARN, message);
         }
 
-        public void Info(String message)
+        public static void Info(String message)
         {
             Print(LogLevel.INFO, message);
         }
