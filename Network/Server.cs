@@ -32,11 +32,7 @@ namespace Network
         void OnAccept(Task<Socket> task)
         {
             Socket clientSocket = task.Result;
-
-            Session session = _createSession(clientSocket);
-            session.OnConnected();
-            session.StartReceive();
-
+            _createSession(clientSocket);
             Accept();
         }
     }
