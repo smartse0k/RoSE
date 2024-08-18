@@ -73,7 +73,8 @@ namespace Network
 
         public int OnReceive(ArraySegment<byte> receiveBuffer)
         {
-            Logger.Info($"[OnReceive] receiveBuffer data size: {receiveBuffer.Count}");
+            string hexString = PrettyConverter.ToHexString(receiveBuffer);
+            Logger.Info($"[OnReceive] receiveBuffer: {hexString}");
             return 0;
         }
 
