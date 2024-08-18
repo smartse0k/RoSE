@@ -4,10 +4,10 @@ using Util;
 
 namespace Network
 {
-    public class Session
+    public abstract class Session
     {
-        readonly Socket _socket;
-        bool _isConnected;
+        protected readonly Socket _socket;
+        protected bool _isConnected;
 
         // receive buffer
         const int ReceiveBufferSize = 1024 * 1024 * 4;
@@ -39,14 +39,6 @@ namespace Network
             _socket.ReceiveAsync(buffer, SocketFlags.None).ContinueWith(ContinueReceive);
         }
 
-        public void OnConnected()
-        {
-            Logger.Info($"client connected. remoteEndPoint: {_socket.RemoteEndPoint}");
-
-            byte[] welcome = Encoding.UTF8.GetBytes("CLIENT hello");
-            _socket.Send(welcome);
-        }
-
         private void ContinueReceive(Task<int> task)
         {
             int receivedBytes = task.Result;
@@ -71,16 +63,10 @@ namespace Network
             StartReceive();
         }
 
-        public int OnReceive(ArraySegment<byte> receiveBuffer)
-        {
-            string hexString = PrettyConverter.ToHexString(receiveBuffer);
-            Logger.Info($"[OnReceive] receiveBuffer: {hexString}");
-            return 0;
-        }
+        abstract public void OnConnected();
 
-        public void OnDisconnected()
-        {
-            Logger.Info($"client disconnected. remoteEndPoint: {_socket.RemoteEndPoint}");
-        }
+        abstract public int OnReceive(ArraySegment<byte> receiveBuffer);
+
+        abstract public void OnDisconnected();
     }
 }
