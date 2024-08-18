@@ -21,7 +21,7 @@ namespace HelloServer
 
         static Session CreateSession(Socket s)
         {
-            Session session = new(s);
+            Session session = new HelloSession(s);
             return session;
         }
     }
