@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util", "Util\Util.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloServer", "HelloServer\HelloServer.csproj", "{6459D5B9-A9A2-4ECD-8846-CDF3F2DCDBF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloClient", "HelloClient\HelloClient.csproj", "{04D450D9-34A1-44C8-B3ED-65E6037A44C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6459D5B9-A9A2-4ECD-8846-CDF3F2DCDBF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6459D5B9-A9A2-4ECD-8846-CDF3F2DCDBF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6459D5B9-A9A2-4ECD-8846-CDF3F2DCDBF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04D450D9-34A1-44C8-B3ED-65E6037A44C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D450D9-34A1-44C8-B3ED-65E6037A44C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04D450D9-34A1-44C8-B3ED-65E6037A44C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D450D9-34A1-44C8-B3ED-65E6037A44C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
