@@ -6,10 +6,10 @@ namespace Network
 {
     public class Server
     {
-        Socket _listenSocket;
-        Action<Socket> _onClientConnected; // FIXME : 나중에 인터페이스화 해야함
+        readonly Socket _listenSocket;
+        readonly Func<Socket, Session> _createSession;
 
-        public Server(int port, Action<Socket> onClientConnected)
+        public Server(int port, Func<Socket, Session> createSession)
         {
             IPAddress ipAddress = IPAddress.Any;
             IPEndPoint ipEndPoint = new(ipAddress, port);
@@ -17,7 +17,7 @@ namespace Network
             _listenSocket.Bind(ipEndPoint);
             _listenSocket.Listen(5);
 
-            _onClientConnected = onClientConnected;
+            _createSession = createSession;
 
             Logger.Info($"listening at port {port}...");
 
@@ -32,7 +32,11 @@ namespace Network
         void OnAccept(Task<Socket> task)
         {
             Socket clientSocket = task.Result;
-            _onClientConnected(clientSocket);
+
+            Session session = _createSession(clientSocket);
+            session.OnConnected();
+            session.StartReceive();
+
             Accept();
         }
     }
