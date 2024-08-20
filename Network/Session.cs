@@ -41,7 +41,18 @@ namespace Network
 
         private void ContinueReceive(Task<int> task)
         {
-            int receivedBytes = task.Result;
+            int receivedBytes = 0;
+            try
+            {
+                receivedBytes = task.Result;
+            } catch (AggregateException ex) {
+                if (ex.InnerException != null)
+                {
+                    Logger.Warn($"[ContinueReceive] {ex.InnerException.Message}");
+                } else {
+                    Logger.Warn($"[ContinueReceive] {ex.Message}");
+                }
+            }
 
             if (receivedBytes == 0)
             {
