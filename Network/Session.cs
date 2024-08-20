@@ -71,7 +71,34 @@ namespace Network
             ArraySegment<byte> receiveBuffer = new(_receiveBuffer.Array, _receiveBufferReadOffset, _receiveBufferWriteOffset - _receiveBufferReadOffset);
             _receiveBufferReadOffset += OnReceive(receiveBuffer);
 
+            AdjustReadOffset();
+
             StartReceive();
+        }
+
+        private void AdjustReadOffset()
+        {
+            if (_receiveBufferReadOffset == 0)
+            {
+                return;
+            }
+
+            int unprocessedSize = _receiveBufferWriteOffset - _receiveBufferReadOffset;
+            
+            if (unprocessedSize == 0)
+            {
+                _receiveBufferWriteOffset = 0;
+                _receiveBufferReadOffset = 0;
+                return;
+            }
+
+            if (_receiveBuffer.Array == null)
+            {
+                Logger.Error("[AdjustReadOffset] array of receive buffer is null.");
+                return;
+            }
+
+            Array.Copy(_receiveBuffer.Array, _receiveBufferReadOffset, _receiveBuffer.Array, 0, unprocessedSize);
         }
 
         public int Send(byte[] data)
