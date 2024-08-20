@@ -4,8 +4,31 @@ namespace Network
 {
     abstract public class Packet
     {
-        abstract public byte[] Serialize();
+        abstract protected void SerializeImpl();
         abstract protected void DeserializeImpl(ReadOnlySpan<byte> span);
+
+        public byte[] Serialize()
+        {
+            _serializeWriteOffset = 0;
+            SerializeImpl();
+
+            byte[] result = new byte[_serializeWriteOffset];
+            if (_serializeBuffer != null)
+            {
+                Array.Copy(_serializeBuffer, result, _serializeWriteOffset);
+            }
+
+            _serializeBuffer = null;
+
+            return result;
+        }
+
+        public void Deserialize(byte[] data)
+        {
+            ReadOnlySpan<byte> span = data;
+            _deserializeReadOffset = 0;
+            DeserializeImpl(span);
+        }
 
         // Serialize
         private const int SerializeBufferSize = 1024 * 1024 * 4;
@@ -68,13 +91,6 @@ namespace Network
 
         // Deserialize
         private int _deserializeReadOffset = 0;
-
-        protected void Deserialize(byte[] data)
-        {
-            ReadOnlySpan<byte> span = data;
-            _deserializeReadOffset = 0;
-            DeserializeImpl(span);
-        }
 
         private bool CheckDeserializeBuffer(ReadOnlySpan<byte> span, int readSize)
         {
@@ -142,6 +158,7 @@ namespace Network
             }
 
             target = Encoding.UTF8.GetString(span.Slice(_deserializeReadOffset, stringSize));
+            _deserializeReadOffset += stringSize;
 
             return true;
         }
