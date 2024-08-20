@@ -63,6 +63,11 @@ namespace Network
             StartReceive();
         }
 
+        public int Send(byte[] data)
+        {
+            return _socket.Send(data);
+        }
+
         abstract public void OnConnected();
 
         abstract public int OnReceive(ArraySegment<byte> receiveBuffer);
