@@ -7,7 +7,7 @@ namespace Network
     public abstract class Session
     {
         protected readonly Socket _socket;
-        protected bool _isConnected;
+        public bool Connected { get; private set; }
 
         // receive buffer
         const int ReceiveBufferSize = 1024 * 1024 * 4;
@@ -18,7 +18,7 @@ namespace Network
         public Session(Socket socket)
         {
             _socket = socket;
-            _isConnected = true;
+            Connected = true;
 
             _receiveBuffer = new(new byte[ReceiveBufferSize], 0, ReceiveBufferSize);
             _receiveBufferWriteOffset = 0;
@@ -45,7 +45,7 @@ namespace Network
 
             if (receivedBytes == 0)
             {
-                _isConnected = false;
+                Connected = false;
                 OnDisconnected();
                 return;
             }
