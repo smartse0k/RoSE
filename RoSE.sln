@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Network", "Network\Network.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util", "Util\Util.csproj", "{C1E8515F-666F-4967-9C38-051BE0064D78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloServer", "HelloServer\HelloServer.csproj", "{6459D5B9-A9A2-4ECD-8846-CDF3F2DCDBF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloServer", "HelloServer\HelloServer.csproj", "{6459D5B9-A9A2-4ECD-8846-CDF3F2DCDBF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloClient", "HelloClient\HelloClient.csproj", "{04D450D9-34A1-44C8-B3ED-65E6037A44C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloClient", "HelloClient\HelloClient.csproj", "{04D450D9-34A1-44C8-B3ED-65E6037A44C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloPacket", "HelloPacket\HelloPacket.csproj", "{F0973BED-6A9A-4FF8-A130-14947D3F8402}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{04D450D9-34A1-44C8-B3ED-65E6037A44C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04D450D9-34A1-44C8-B3ED-65E6037A44C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04D450D9-34A1-44C8-B3ED-65E6037A44C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0973BED-6A9A-4FF8-A130-14947D3F8402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0973BED-6A9A-4FF8-A130-14947D3F8402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0973BED-6A9A-4FF8-A130-14947D3F8402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0973BED-6A9A-4FF8-A130-14947D3F8402}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
