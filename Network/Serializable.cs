@@ -2,7 +2,7 @@
 
 namespace Network
 {
-    abstract public class Packet
+    abstract public class Serializable
     {
         abstract protected void SerializeImpl();
         abstract protected void DeserializeImpl(ReadOnlySpan<byte> span);
@@ -159,6 +159,19 @@ namespace Network
 
             target = Encoding.UTF8.GetString(span.Slice(_deserializeReadOffset, stringSize));
             _deserializeReadOffset += stringSize;
+
+            return true;
+        }
+
+        protected bool Get(ReadOnlySpan<byte> span, ref byte[] target, int size)
+        {
+            if (!CheckDeserializeBuffer(span, size))
+            {
+                return false;
+            }
+
+            target = span.Slice(_deserializeReadOffset, size).ToArray();
+            _deserializeReadOffset += size;
 
             return true;
         }
