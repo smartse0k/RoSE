@@ -5,13 +5,12 @@ namespace HelloPacket
 {
     public class Program
     {
-
         public class LoginRequest: Packet
         {
             public string id = "";
             public string password = "";
 
-            protected override OpCode OpCode => OpCode.LoginRequest;
+            protected override int OpCode => (int)ClientOpCode.LoginRequest;
 
             protected override void DeserializeImpl(ReadOnlySpan<byte> span)
             {
@@ -67,7 +66,7 @@ namespace HelloPacket
 
                 switch (Packet.GetOpCode(loginRequestPacket))
                 {
-                    case OpCode.LoginRequest:
+                    case (int)ClientOpCode.LoginRequest:
                         LoginRequest loginRequest = new();
                         loginRequest.Deserialize(packetPayload);
 

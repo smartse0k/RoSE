@@ -1,7 +1,7 @@
 ﻿
 namespace HelloPacket
 {
-    public enum OpCode
+    public enum ClientOpCode
     {
         LoginRequest,
         LoginResponse,
